@@ -12,7 +12,11 @@ $(function() {
 
         add_header(materials_display, "Total Materials");
         for (var mat_key in total_materials) {
-            materials_display.append(`${mat_key}: ${total_materials[mat_key]}<br />`);
+            add_sub_header(materials_display, mat_key)
+            materials_display.append(`Count:     ${total_materials[mat_key]}<br />`);
+            if (items[mat_key] && items[mat_key].time) {
+                materials_display.append(`Factories: ${total_materials[mat_key] * items[mat_key].time}`);
+            }
         }
 
         add_header(materials_display, "Production Time");
@@ -42,6 +46,7 @@ $(function() {
 
     function calculate_total_materials(item) {
         var total_materials = {};
+        total_materials[item.name] = 1;
 
         function count_material_list(mats, multiplier) {
             for (var mat_key in mats) {
@@ -94,6 +99,10 @@ $(function() {
     }
 
     function add_header(element, text) {
+        element.append(`<h2>${text}</h2>`);
+    }
+
+    function add_sub_header(element, text) {
         element.append(`<h3>${text}</h3>`);
     }
 
