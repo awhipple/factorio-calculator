@@ -61,11 +61,11 @@ $(function() {
                 var total_needed = mats[mat_key] * multiplier;
 
                 if (items[mat_key]) {
-                    total_materials.built[mat_key] = total_materials[mat_key] || 0;
+                    total_materials.built[mat_key] = total_materials.built[mat_key] || 0;
                     total_materials.built[mat_key] += total_needed;
                     count_material_list(items[mat_key].mats, total_needed);
                 } else {
-                    total_materials.raw[mat_key] = total_materials[mat_key] || 0;
+                    total_materials.raw[mat_key] = total_materials.raw[mat_key] || 0;
                     total_materials.raw[mat_key] += total_needed;
                 }
             }
