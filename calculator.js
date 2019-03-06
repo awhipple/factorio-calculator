@@ -1,6 +1,7 @@
 $(function() {
     var items = window.items;
     var item_select = $("#item_select");
+    var per_sec_input = $("#items_per_sec");
     var materials_display = $("#materials");
 
     function show_item_details() {
@@ -11,11 +12,12 @@ $(function() {
         total_materials = calculate_total_materials(item);
 
         add_header(materials_display, "Total Materials");
+        var per_sec = per_sec_input.val() || 1;
         for (var mat_key in total_materials) {
             add_sub_header(materials_display, mat_key)
-            materials_display.append(`Count:     ${total_materials[mat_key]}<br />`);
+            materials_display.append(`Count:            ${total_materials[mat_key] * per_sec}<br />`);
             if (items[mat_key] && items[mat_key].time) {
-                materials_display.append(`Factories: ${total_materials[mat_key] * items[mat_key].time}`);
+                materials_display.append(`Production Units: ${total_materials[mat_key] * items[mat_key].time * per_sec}`);
             }
         }
 
@@ -70,11 +72,12 @@ $(function() {
         divide_item_time_and_mats_and_add_name();
 
         item_select.change(show_item_details);
+        per_sec_input.change(show_item_details);
 
         populate_select();
 
         // Test Code
-        item_select.val("logistic science pack");
+        item_select.val("chemical science pack");
         item_select.change();
     }
 
