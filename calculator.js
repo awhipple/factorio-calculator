@@ -13,11 +13,17 @@ $(function() {
 
         add_header(materials_display, "Total Materials");
         var per_sec = per_sec_input.val() || 1;
-        for (var mat_key in total_materials) {
+
+        add_sub_header(materials_display, "Raw");
+        for (var mat_key in total_materials.raw) {
+            materials_display.append(`${mat_key}: ${total_materials.raw[mat_key] * per_sec}<br />`);
+        }
+
+        for (var mat_key in total_materials.built) {
             add_sub_header(materials_display, mat_key)
-            materials_display.append(`Count:            ${total_materials[mat_key] * per_sec}<br />`);
+            materials_display.append(`Count:            ${total_materials.built[mat_key] * per_sec}<br />`);
             if (items[mat_key] && items[mat_key].time) {
-                materials_display.append(`Production Units: ${total_materials[mat_key] * items[mat_key].time * per_sec}`);
+                materials_display.append(`Production Units: ${total_materials.built[mat_key] * items[mat_key].time * per_sec}`);
             }
         }
 
@@ -47,18 +53,20 @@ $(function() {
     }
 
     function calculate_total_materials(item) {
-        var total_materials = {};
-        total_materials[item.name] = 1;
+        var total_materials = { raw: {}, built: {} };
+        total_materials.built[item.name] = 1;
 
         function count_material_list(mats, multiplier) {
             for (var mat_key in mats) {
                 var total_needed = mats[mat_key] * multiplier;
 
-                total_materials[mat_key] = total_materials[mat_key] || 0;
-                total_materials[mat_key] += total_needed;
-
                 if (items[mat_key]) {
+                    total_materials.built[mat_key] = total_materials[mat_key] || 0;
+                    total_materials.built[mat_key] += total_needed;
                     count_material_list(items[mat_key].mats, total_needed);
+                } else {
+                    total_materials.raw[mat_key] = total_materials[mat_key] || 0;
+                    total_materials.raw[mat_key] += total_needed;
                 }
             }
         }
