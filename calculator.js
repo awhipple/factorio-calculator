@@ -1,7 +1,10 @@
 $(function() {
+    var START_ON = "flying robot frame";
+
     var items = window.items;
     var item_select = $("#item_select");
     var per_sec_input = $("#items_per_sec");
+    var factory_breakdown_checkbox = $("#show_factory_breakdown");
     var materials_display = $("#materials");
 
     function show_item_details() {
@@ -23,7 +26,18 @@ $(function() {
             add_sub_header(materials_display, mat_key)
             materials_display.append(`Count:            ${total_materials.built[mat_key] * per_sec}<br />`);
             if (items[mat_key] && items[mat_key].time) {
-                materials_display.append(`Production Units: ${total_materials.built[mat_key] * items[mat_key].time * per_sec}`);
+                var production_units = total_materials.built[mat_key] * items[mat_key].time * per_sec;
+                materials_display.append(`Production Units: ${[production_units]}`);
+                if (factory_breakdown_checkbox.is(":checked")) {
+                    materials_display.append(
+                        '<br />',
+                        `0.50 x ${production_units / 0.5} <br />`,
+                        `0.75 x ${production_units / 0.75} <br />`,
+                        `1.00 x ${production_units / 1} <br />`,
+                        `1.25 x ${production_units / 1.25} <br />`,
+                        `2.00 x ${production_units / 2} <br />`
+                    );
+                }
             }
         }
 
@@ -81,11 +95,12 @@ $(function() {
 
         item_select.change(show_item_details);
         per_sec_input.change(show_item_details);
+        factory_breakdown_checkbox.change(show_item_details);
 
         populate_select();
 
         // Test Code
-        item_select.val("chemical science pack");
+        item_select.val(START_ON);
         item_select.change();
     }
 

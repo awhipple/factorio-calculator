@@ -14,6 +14,14 @@ window.items = {
             "iron gear wheel": 1,
         }
     },
+    "battery": {
+        "time": 4,
+        "mats": {
+            "iron plate": 1,
+            "copper plate": 1,
+            "sulferic acid": 20,
+        }
+    },
     "chemical science pack": {
         "time": 24,
         "produced": 2,
@@ -43,12 +51,29 @@ window.items = {
             "copper cable": 3,
         }
     },
+    "electric engine unit": {
+        "time": 10,
+        "mats": {
+            "electronic circuit": 2,
+            "engine unit": 1,
+            "lubricant": 15,
+        }
+    },
     "engine unit": {
         "time": 10,
         "mats": {
             "steel plate": 1,
             "iron gear wheel": 1,
             "pipe": 2,
+        }
+    },
+    "flying robot frame": {
+        "time": 20,
+        "mats": {
+            "steel plate": 1,
+            "battery": 2,
+            "electronic circuit": 3,
+            "electric engine unit": 1,
         }
     },
     "inserter": {
@@ -78,6 +103,13 @@ window.items = {
             "inserter": 1,
         }
     },
+    "lubricant": {
+        "time": 1,
+        "produced": 10,
+        "mats": {
+            "heavy oil": 10,
+        }
+    },
     "pipe": {
         "time": 0.5,
         "mats": {
@@ -96,6 +128,23 @@ window.items = {
         "time": 16,
         "mats": {
             "iron plate": 5,
+        }
+    },
+    "sulfer": {
+        "time": 1,
+        "produced": 2,
+        "mats": {
+            "water": 30,
+            "petroleum gas": 30,
+        }
+    },
+    "sulferic acid": {
+        "time": 1,
+        "produced": 50,
+        "mats": {
+            "iron plate": 1,
+            "sulfer": 5,
+            "water": 100,
         }
     },
     "transport belt": {
