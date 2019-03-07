@@ -5,6 +5,14 @@
         h3 {
             margin-bottom: 0px;
         }
+        
+        .item_details {
+            display: flex
+        }
+        
+        #craft_tree {
+            margin-left: 100px;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="./items.js"></script>
@@ -17,8 +25,15 @@
     </select>
     <input id="items_per_sec" placeholder="Items Per Sec (Default: 1)" />
     <br />
-    <input type="checkbox" id="show_factory_breakdown" /> Show Factory Breakdown
-    <pre id="materials">
+    <input type="checkbox" id="show_material_details" /> Show Material Details
+    <div class="item_details">
+        <div>
+            <pre id="materials"></pre>
+        </div>
+        <div>
+            <pre id="craft_tree"></pre>
+        </div>
+    </div>
     </div>
 </body>
 

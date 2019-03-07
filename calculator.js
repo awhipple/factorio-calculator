@@ -4,22 +4,28 @@ $(function() {
     var items = window.items;
     var item_select = $("#item_select");
     var per_sec_input = $("#items_per_sec");
-    var factory_breakdown_checkbox = $("#show_factory_breakdown");
+    var material_detail_checkbox = $("#show_material_details");
     var materials_display = $("#materials");
+    var craft_tree_display = $("#craft_tree");
 
     function show_item_details() {
         var item = items[item_select.val()];
 
         materials_display.empty();
+        craft_tree_display.empty();
 
         total_materials = calculate_total_materials(item);
 
         add_header(materials_display, "Total Materials");
         var per_sec = per_sec_input.val() || 1;
 
+
         add_sub_header(materials_display, "Raw");
         for (var mat_key in total_materials.raw) {
             materials_display.append(`${mat_key}: ${total_materials.raw[mat_key] * per_sec}<br />`);
+            if (material_detail_checkbox.is(":checked")) {
+                materials_display.append(`Goes into ${generate_mat_used_for_list(mat_key, item)}<br /><br />`);
+            }
         }
 
         for (var mat_key in total_materials.built) {
@@ -28,7 +34,7 @@ $(function() {
             if (items[mat_key] && items[mat_key].time) {
                 var production_units = total_materials.built[mat_key] * items[mat_key].time * per_sec;
                 materials_display.append(`Production Units: ${[production_units]}`);
-                if (factory_breakdown_checkbox.is(":checked")) {
+                if (material_detail_checkbox.is(":checked")) {
                     materials_display.append(
                         '<br />',
                         `0.50 x ${production_units / 0.5} <br />`,
@@ -37,14 +43,12 @@ $(function() {
                         `1.25 x ${production_units / 1.25} <br />`,
                         `2.00 x ${production_units / 2} <br />`
                     );
+                    materials_display.append(`Goes into ${generate_mat_used_for_list(mat_key, item)}<br />`);
                 }
             }
         }
 
-        add_header(materials_display, "Production Time");
-        materials_display.append(`${item.time} seconds`);
-
-        add_header(materials_display, "Material Tree");
+        add_header(craft_tree_display, "Material Tree");
         show_item_materials(item, 1, '');
     }
 
@@ -57,8 +61,8 @@ $(function() {
             var first_item = i === 0;
             var last_item = i === keys.length - 1;
 
-            materials_display.append(first_item && spacers.length >= 3 ? spacers.slice(0, -3) + '-->' : spacers, `${key}: ${item.mats[key] * multiplier}`, '<br />');
-            materials_display.append(spacers, (last_item && !sub_item) ? ' ' : '|', '<br />');
+            craft_tree_display.append(first_item && spacers.length >= 3 ? spacers.slice(0, -3) + '-->' : spacers, `${key}: ${item.mats[key] * multiplier}`, '<br />');
+            craft_tree_display.append(spacers, (last_item && !sub_item) ? ' ' : '|', '<br />');
 
             if (sub_item) {
                 show_item_materials(sub_item, multiplier * item.mats[key], spacers + (last_item ? '   ' : '|  '));
@@ -90,12 +94,31 @@ $(function() {
         return total_materials;
     }
 
+    function generate_mat_used_for_list(material, item) {
+        var found_parents = [];
+
+        function traverse_mat_tree(item) {
+            for (var mat_key in item.mats) {
+                if (mat_key === material) {
+                    found_parents.push(item.name);
+                }
+                var item_mat = items[mat_key];
+                if (item_mat) {
+                    traverse_mat_tree(item_mat);
+                }
+            }
+        }
+        traverse_mat_tree(item);
+        found_parents = [...new Set(found_parents)];
+        return found_parents.length === 0 ? 'nothing' : found_parents.join(', ');
+    }
+
     function init() {
         divide_item_time_and_mats_and_add_name();
 
         item_select.change(show_item_details);
         per_sec_input.change(show_item_details);
-        factory_breakdown_checkbox.change(show_item_details);
+        material_detail_checkbox.change(show_item_details);
 
         populate_select();
 
