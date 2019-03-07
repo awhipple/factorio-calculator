@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "flying robot frame";
+    var START_ON = "electric furnace";
 
     var items = window.items;
     var item_select = $("#item_select");

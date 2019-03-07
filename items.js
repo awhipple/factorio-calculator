@@ -59,6 +59,14 @@ window.items = {
             "lubricant": 15,
         }
     },
+    "electric furnace": {
+        "time": 5,
+        "mats": {
+            "steel plate": 10,
+            "advanced circuit": 5,
+            "stone brick": 10,
+        }
+    },
     "engine unit": {
         "time": 10,
         "mats": {
@@ -128,6 +136,12 @@ window.items = {
         "time": 16,
         "mats": {
             "iron plate": 5,
+        }
+    },
+    "stone brick": {
+        "time": 3.2,
+        "mats": {
+            "stone": 2,
         }
     },
     "sulfer": {
