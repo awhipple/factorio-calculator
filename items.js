@@ -104,6 +104,13 @@ window.items = {
             "iron ore": 1,
         }
     },
+    "iron stick": {
+        "time": 0.5,
+        "produced": 2,
+        "mats": {
+            "iron plate": 1,
+        }
+    },
     "logistic science pack": {
         "time": 6,
         "mats": {
@@ -146,6 +153,31 @@ window.items = {
             "electronic circuit": 20,
             "advanced circuit": 2,
             "sulferic acid": 5,
+        }
+    },
+    "production science pack": {
+        "time": 21,
+        "produced": 3,
+        "mats": {
+            "rail": 30,
+            "electric furnace": 1,
+            "productivity module": 1,
+        }
+    },
+    "productivity module": {
+        "time": 15,
+        "mats": {
+            "electronic circuit": 5,
+            "advanced circuit": 5,
+        }
+    },
+    "rail": {
+        "time": 0.5,
+        "produced": 2,
+        "mats": {
+            "stone": 1,
+            "steel plate": 1,
+            "iron stick": 1,
         }
     },
     "steel plate": {

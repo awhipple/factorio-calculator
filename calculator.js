@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "utility science pack";
+    var START_ON = "production science pack";
 
     var items = window.items;
     var hide_items = [];
