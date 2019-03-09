@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "electric furnace";
+    var START_ON = "utility science pack";
 
     var items = window.items;
     var item_select = $("#item_select");
@@ -22,7 +22,7 @@ $(function() {
 
         add_sub_header(materials_display, "Raw");
         for (var mat_key in total_materials.raw) {
-            materials_display.append(`${mat_key}: ${total_materials.raw[mat_key] * per_sec}<br />`);
+            materials_display.append(`${mat_key}: ${format_num(total_materials.raw[mat_key] * per_sec)}<br />`);
             if (material_detail_checkbox.is(":checked")) {
                 materials_display.append(`Goes into ${generate_mat_used_for_list(mat_key, item)}<br /><br />`);
             }
@@ -30,18 +30,18 @@ $(function() {
 
         for (var mat_key in total_materials.built) {
             add_sub_header(materials_display, mat_key)
-            materials_display.append(`Count:            ${total_materials.built[mat_key] * per_sec}<br />`);
+            materials_display.append(`Count:            ${format_num(total_materials.built[mat_key] * per_sec)}<br />`);
             if (items[mat_key] && items[mat_key].time) {
                 var production_units = total_materials.built[mat_key] * items[mat_key].time * per_sec;
-                materials_display.append(`Production Units: ${[production_units]}`);
+                materials_display.append(`Production Units: ${format_num(production_units)}`);
                 if (material_detail_checkbox.is(":checked")) {
                     materials_display.append(
                         '<br />',
-                        `0.50 x ${production_units / 0.5} <br />`,
-                        `0.75 x ${production_units / 0.75} <br />`,
-                        `1.00 x ${production_units / 1} <br />`,
-                        `1.25 x ${production_units / 1.25} <br />`,
-                        `2.00 x ${production_units / 2} <br />`
+                        `0.50 x ${format_num(production_units / 0.5)} <br />`,
+                        `0.75 x ${format_num(production_units / 0.75)} <br />`,
+                        `1.00 x ${format_num(production_units / 1)} <br />`,
+                        `1.25 x ${format_num(production_units / 1.25)} <br />`,
+                        `2.00 x ${format_num(production_units / 2)} <br />`
                     );
                     materials_display.append(`Goes into ${generate_mat_used_for_list(mat_key, item)}<br />`);
                 }
@@ -61,7 +61,7 @@ $(function() {
             var first_item = i === 0;
             var last_item = i === keys.length - 1;
 
-            craft_tree_display.append(first_item && spacers.length >= 3 ? spacers.slice(0, -3) + '-->' : spacers, `${key}: ${item.mats[key] * multiplier}`, '<br />');
+            craft_tree_display.append(first_item && spacers.length >= 3 ? spacers.slice(0, -3) + '-->' : spacers, `${key}: ${format_num(item.mats[key] * multiplier)}`, '<br />');
             craft_tree_display.append(spacers, (last_item && !sub_item) ? ' ' : '|', '<br />');
 
             if (sub_item) {
@@ -153,6 +153,10 @@ $(function() {
 
     function add_sub_header(element, text) {
         element.append(`<h3>${text}</h3>`);
+    }
+
+    function format_num(value) {
+        return Math.floor(value * 100) / 100;
     }
 
     init();

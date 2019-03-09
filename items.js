@@ -111,6 +111,14 @@ window.items = {
             "inserter": 1,
         }
     },
+    "low density structure": {
+        "time": 20,
+        "mats": {
+            "copper plate": 20,
+            "steel plate": 2,
+            "plastic bar": 5,
+        }
+    },
     "lubricant": {
         "time": 1,
         "produced": 10,
@@ -130,6 +138,14 @@ window.items = {
         "mats": {
             "coal": 1,
             "petroleum gas": 20
+        }
+    },
+    "processing unit": {
+        "time": 10,
+        "mats": {
+            "electronic circuit": 20,
+            "advanced circuit": 2,
+            "sulferic acid": 5,
         }
     },
     "steel plate": {
@@ -168,5 +184,14 @@ window.items = {
             "iron plate": 1,
             "iron gear wheel": 1,
         }
-    }
+    },
+    "utility science pack": {
+        "time": 21,
+        "produced": 3,
+        "mats": {
+            "processing unit": 2,
+            "flying robot frame": 1,
+            "low density structure": 3,
+        }
+    },
 }
