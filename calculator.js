@@ -2,6 +2,7 @@ $(function() {
     var START_ON = "utility science pack";
 
     var items = window.items;
+    var hide_items = [];
     var item_select = $("#item_select");
     var per_sec_input = $("#items_per_sec");
     var material_detail_checkbox = $("#show_material_details");
@@ -22,14 +23,20 @@ $(function() {
 
         add_sub_header(materials_display, "Raw");
         for (var mat_key in total_materials.raw) {
-            materials_display.append(`${mat_key}: ${format_num(total_materials.raw[mat_key] * per_sec)}<br />`);
+            if (hide_items.indexOf(mat_key) !== -1) {
+                continue;
+            }
+            materials_display.append(`${hide_material_button(mat_key)}${mat_key}: ${format_num(total_materials.raw[mat_key] * per_sec)}<br />`);
             if (material_detail_checkbox.is(":checked")) {
                 materials_display.append(`Goes into ${generate_mat_used_for_list(mat_key, item)}<br /><br />`);
             }
         }
 
         for (var mat_key in total_materials.built) {
-            add_sub_header(materials_display, mat_key)
+            if (hide_items.indexOf(mat_key) !== -1) {
+                continue;
+            }
+            add_sub_header(materials_display, hide_material_button(mat_key) + mat_key)
             materials_display.append(`Count:            ${format_num(total_materials.built[mat_key] * per_sec)}<br />`);
             if (items[mat_key] && items[mat_key].time) {
                 var production_units = total_materials.built[mat_key] * items[mat_key].time * per_sec;
@@ -48,8 +55,27 @@ $(function() {
             }
         }
 
+        if (hide_items.length > 0) {
+            add_sub_header(materials_display, "Hidden Materials");
+        }
+        for (var i = 0; i < hide_items.length; i++) {
+            materials_display.append(`${show_material_button(hide_items[i])}${hide_items[i]}<br />`);
+        }
+
         add_header(craft_tree_display, "Material Tree");
         show_item_materials(item, 1, '');
+
+        $(".hide.button").on('click', function(ele) {
+            hide_items.push($(this).attr("data-material"));
+            show_item_details();
+        });
+
+        $(".show.button").on('click', function(ele) {
+            hide_items.splice(hide_items.indexOf($(this).attr("data-material")), 1);
+            show_item_details();
+        });
+
+
     }
 
     function show_item_materials(item, multiplier, spacers) {
@@ -116,7 +142,10 @@ $(function() {
     function init() {
         divide_item_time_and_mats_and_add_name();
 
-        item_select.change(show_item_details);
+        item_select.change(function() {
+            hide_items = [];
+            show_item_details();
+        });
         per_sec_input.change(show_item_details);
         material_detail_checkbox.change(show_item_details);
 
@@ -153,6 +182,14 @@ $(function() {
 
     function add_sub_header(element, text) {
         element.append(`<h3>${text}</h3>`);
+    }
+
+    function hide_material_button(material) {
+        return `<div class='hide button' data-material='${material}')'></div>`;
+    }
+
+    function show_material_button(material) {
+        return `<div class='show button' data-material='${material}')'></div>`;
     }
 
     function format_num(value) {

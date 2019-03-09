@@ -13,6 +13,37 @@
         #craft_tree {
             margin-left: 100px;
         }
+        
+        .button {
+            display: inline;
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .button:before {
+            color: #000;
+            font-weight: 300;
+            font-family: Arial, sans-serif;
+        }
+        
+        .show.button {
+            background: lightgreen;
+        }
+        
+        .show.button:before {
+            content: ' + ';
+        }
+        
+        .hide.button {
+            background: gray;
+        }
+        
+        .hide.button:before {
+            content: ' x ';
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="./items.js"></script>
