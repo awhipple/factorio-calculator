@@ -180,6 +180,20 @@ window.items = {
             "iron stick": 1,
         }
     },
+    "rocket control unit": {
+        "time": 30,
+        "mats": {
+            "processing unit": 1,
+            "speed module": 1,
+        }
+    },
+    "speed module": {
+        "time": 15,
+        "mats": {
+            "electronic circuit": 5,
+            "advanced circuit": 5,
+        }
+    },
     "steel plate": {
         "time": 16,
         "mats": {
