@@ -75,6 +75,12 @@ window.items = {
             "pipe": 2,
         }
     },
+    "firearm magazine": {
+        "time": 1,
+        "mats": {
+            "iron plate": 4,
+        }
+    },
     "flying robot frame": {
         "time": 20,
         "mats": {
@@ -82,6 +88,13 @@ window.items = {
             "battery": 2,
             "electronic circuit": 3,
             "electric engine unit": 1,
+        }
+    },
+    "grenade": {
+        "time": 8,
+        "mats": {
+            "coal": 10,
+            "iron plate": 5,
         }
     },
     "inserter": {
@@ -131,6 +144,23 @@ window.items = {
         "produced": 10,
         "mats": {
             "heavy oil": 10,
+        }
+    },
+    "military science pack": {
+        "time": 10,
+        "produced": 2,
+        "mats": {
+            "piercing rounds magazine": 1,
+            "grenade": 1,
+            "wall": 2,
+        }
+    },
+    "piercing rounds magazine": {
+        "time": 3,
+        "mats": {
+            "copper plate": 5,
+            "steel plate": 1,
+            "firearm magazine": 1,
         }
     },
     "pipe": {
@@ -238,6 +268,12 @@ window.items = {
             "processing unit": 2,
             "flying robot frame": 1,
             "low density structure": 3,
+        }
+    },
+    "wall": {
+        "time": 0.5,
+        "mats": {
+            "stone brick": 5,
         }
     },
 }
