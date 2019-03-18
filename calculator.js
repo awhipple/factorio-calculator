@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "military science pack";
+    var START_ON = "power armor mk2";
 
     var items = window.items;
     var hide_items = [];

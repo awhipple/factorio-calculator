@@ -44,6 +44,21 @@ window.items = {
             "copper ore": 1,
         }
     },
+    "efficiency module": {
+        "time": 15,
+        "mats": {
+            "electronic circuit": 5,
+            "advanced circuit": 5,
+        }
+    },
+    "efficiency module 2": {
+        "time": 30,
+        "mats": {
+            "advanced circuit": 5,
+            "processing unit": 5,
+            "efficiency module": 4,
+        }
+    },
     "electronic circuit": {
         "time": 0.5,
         "mats": {
@@ -177,6 +192,16 @@ window.items = {
             "petroleum gas": 20
         }
     },
+    "power armor mk2": {
+        "time": 25,
+        "mats": {
+            "processing unit": 60,
+            "electric engine unit": 40,
+            "low density structure": 30,
+            "speed module 2": 25,
+            "efficiency module 2": 25,
+        }
+    },
     "processing unit": {
         "time": 10,
         "mats": {
@@ -222,6 +247,14 @@ window.items = {
         "mats": {
             "electronic circuit": 5,
             "advanced circuit": 5,
+        }
+    },
+    "speed module 2": {
+        "time": 30,
+        "mats": {
+            "advanced circuit": 5,
+            "processing unit": 5,
+            "speed module": 4,
         }
     },
     "steel plate": {
