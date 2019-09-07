@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "power armor mk2";
+    var START_ON = "solar panel";
 
     var items = window.items;
     var hide_items = [];
