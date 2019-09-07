@@ -294,7 +294,7 @@ window.items = {
             "stone": 2,
         }
     },
-    "sulfer": {
+    "sulfur": {
         "time": 1,
         "produced": 2,
         "mats": {
