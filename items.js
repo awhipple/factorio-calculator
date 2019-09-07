@@ -90,6 +90,15 @@ window.items = {
             "pipe": 2,
         }
     },
+    "explosives": {
+        "time": 4,
+        "produced": 2,
+        "mats": {
+            "coal": 1,
+            "sulfur": 1,
+            "water": 10,
+        }
+    },
     "firearm magazine": {
         "time": 1,
         "mats": {
@@ -233,6 +242,14 @@ window.items = {
             "stone": 1,
             "steel plate": 1,
             "iron stick": 1,
+        }
+    },
+    "rocket": {
+        "time": 8,
+        "mats": {
+            "iron plate": 2,
+            "explosives": 1,
+            "electronic circuit": 1,
         }
     },
     "rocket control unit": {
