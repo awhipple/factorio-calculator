@@ -179,6 +179,13 @@ window.items = {
             "wall": 2,
         }
     },
+    "petroleum gas": {
+        "time": 5,
+        "produced": 45,
+        "mats": {
+            "crude oil": 100,
+        }
+    },
     "piercing rounds magazine": {
         "time": 3,
         "mats": {
