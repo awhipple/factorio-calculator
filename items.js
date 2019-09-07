@@ -242,6 +242,14 @@ window.items = {
             "speed module": 1,
         }
     },
+    "solar panel": {
+        "time": 10,
+        "mats": {
+            "copper plate": 5,
+            "steel plate": 5,
+            "electronic circuit": 15,
+        }
+    },
     "speed module": {
         "time": 15,
         "mats": {
