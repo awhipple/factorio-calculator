@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "solar panel";
+    var START_ON = "rocket";
 
     var items = window.items;
     var hide_items = [];
