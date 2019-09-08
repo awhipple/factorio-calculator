@@ -26,7 +26,7 @@ window.items = {
         "time": 24,
         "produced": 2,
         "mats": {
-            "solid fuel": 1,
+            "sulfur": 1,
             "advanced circuit": 3,
             "engine unit": 2,
         }
