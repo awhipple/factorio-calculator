@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "rocket";
+    var START_ON = "production science pack";
 
     var items = window.items;
     var hide_items = [];
@@ -148,6 +148,21 @@ $(function() {
         });
         per_sec_input.change(show_item_details);
         material_detail_checkbox.change(show_item_details);
+
+        $("body").keypress(function(e) {
+            var per_sec = parseFloat(per_sec_input.val()) || 1.0;
+
+            switch (e.keyCode) {
+                case 97:
+                    per_sec -= 0.01;
+                    break;
+                case 115:
+                    per_sec += 0.01;
+                    break;
+            }
+            per_sec_input.val(per_sec.toFixed(2));
+            per_sec_input.change();
+        });
 
         populate_select();
 

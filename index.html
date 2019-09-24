@@ -2,6 +2,16 @@
 
 <head>
     <style>
+        .controls {
+            overflow: hidden;
+            background-color: #BBB;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 5px;
+            border: 2px solid black;
+        }
+        
         h3 {
             margin-bottom: 0px;
         }
@@ -51,12 +61,14 @@
 </head>
 
 <body>
-    <select id="item_select">
-        <option></option>
-    </select>
-    <input id="items_per_sec" placeholder="Items Per Sec (Default: 1)" />
-    <br />
-    <input type="checkbox" id="show_material_details" /> Show Material Details
+    <div class="controls">
+        <select id="item_select">
+            <option></option>
+        </select>
+        <input id="items_per_sec" placeholder="Items Per Sec (Default: 1)" />
+        <br />
+        <input type="checkbox" id="show_material_details" /> Show Material Details
+    </div>
     <div class="item_details">
         <div>
             <pre id="materials"></pre>
