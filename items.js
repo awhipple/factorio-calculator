@@ -19,7 +19,7 @@ window.items = {
         "mats": {
             "iron plate": 1,
             "copper plate": 1,
-            "sulferic acid": 20,
+            "sulfuric acid": 20,
         }
     },
     "chemical science pack": {
@@ -223,7 +223,7 @@ window.items = {
         "mats": {
             "electronic circuit": 20,
             "advanced circuit": 2,
-            "sulferic acid": 5,
+            "sulfuric acid": 5,
         }
     },
     "production science pack": {
@@ -309,12 +309,12 @@ window.items = {
             "petroleum gas": 30,
         }
     },
-    "sulferic acid": {
+    "sulfuric acid": {
         "time": 1,
         "produced": 50,
         "mats": {
             "iron plate": 1,
-            "sulfer": 5,
+            "sulfur": 5,
             "water": 100,
         }
     },
