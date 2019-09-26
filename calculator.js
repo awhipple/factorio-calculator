@@ -147,6 +147,9 @@ $(function() {
             show_item_details();
         });
         per_sec_input.change(show_item_details);
+        per_sec_input.keypress(function(e) {
+            e.stopPropagation();
+        });
         material_detail_checkbox.change(show_item_details);
 
         $("body").keypress(function(e) {
