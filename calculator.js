@@ -181,9 +181,9 @@ $(function() {
 
         populate_select();
 
-        var last_item = localStorage.getItem('last_item');
-        if (last_item) {
-            item_select.val(last_item)
+        var selected_item = get_url_params()['item'] || localStorage.getItem('last_item');
+        if (selected_item) {
+            item_select.val(selected_item)
             item_select.change();
         }
     }
@@ -283,6 +283,14 @@ $(function() {
 
     function format_num(value) {
         return Math.floor(value * 100) / 100;
+    }
+
+    function get_url_params() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+            vars[key] = value;
+        });
+        return vars;
     }
 
     init();
