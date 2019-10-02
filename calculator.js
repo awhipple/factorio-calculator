@@ -8,6 +8,7 @@ $(function() {
     var hide_items = [];
     var item_select = $("#item_select");
     var per_sec_input = $("#items_per_sec");
+    var shuffle_graph_button = $("#shuffle_graph_button");
     var material_detail_checkbox = $("#show_material_details");
     var materials_display = $("#materials");
     var craft_tree_display = $("#craft_tree");
@@ -18,9 +19,6 @@ $(function() {
 
         materials_display.empty();
         craft_tree_display.empty();
-        graph_display.empty();
-
-        clearTimeout(graph_force_timeout);
 
         total_materials = calculate_total_materials(item);
 
@@ -81,9 +79,16 @@ $(function() {
             show_item_details();
         });
 
+        render_graph(item);
+    }
+
+    function render_graph() {
+        var item = items[item_select.val()];
+        graph_display.empty();
         add_header(graph_display, "Material Graph");
         graph = makeGraph(item);
         graph.startForceAtlas2();
+        clearTimeout(graph_force_timeout);
         graph_force_timeout = window.setTimeout(function() { graph.killForceAtlas2() }, 3000);
     }
 
@@ -178,9 +183,27 @@ $(function() {
 
         populate_select();
 
+        shuffle_graph_button.on('click', function() { render_graph(); })
+
         // Test Code
         item_select.val(START_ON);
         item_select.change();
+    }
+
+    function makeGraph(item) {
+        return new sigma({
+            renderer: {
+                container: graph_display[0],
+                type: 'canvas'
+            },
+            settings: {
+                minArrowSize: 7,
+            },
+            graph: {
+                nodes: makeNodes(item.name, {}, true),
+                edges: makeEdges(item.name, {}),
+            },
+        });
     }
 
     function makeNodes(item_name, nodes, first_node = false) {
@@ -222,22 +245,6 @@ $(function() {
             }
         }
         return Object.values(edges);
-    }
-
-    function makeGraph(item) {
-        return new sigma({
-            renderer: {
-                container: graph_display[0],
-                type: 'canvas'
-            },
-            settings: {
-                minArrowSize: 7,
-            },
-            graph: {
-                nodes: makeNodes(item.name, {}, true),
-                edges: makeEdges(item.name, {}),
-            },
-        });
     }
 
     function divide_item_time_and_mats_and_add_name() {
