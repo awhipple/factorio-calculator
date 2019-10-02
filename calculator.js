@@ -181,7 +181,9 @@ $(function() {
 
         populate_select();
 
-        var selected_item = get_url_params()['item'].replace(/%20/, ' ') || localStorage.getItem('last_item');
+        var selected_item_param = get_url_params()['item'];
+        var selected_item = (selected_item_param && selected_item_param.replace(/%20/, ' ')) ||
+            localStorage.getItem('last_item');
         if (selected_item) {
             item_select.val(selected_item)
             item_select.change();
@@ -206,13 +208,19 @@ $(function() {
 
     function makeNodes(item_name, nodes, first_node = false) {
         if (nodes[item_name] === undefined) {
+            var color = "black";
+            if (first_node) {
+                color = "red";
+            } else if (!items[item_name]) {
+                color = "blue";
+            }
             nodes[item_name] = {
                 id: item_name,
                 label: item_name,
                 x: Math.random(),
                 y: Math.random(),
                 size: 1,
-                color: first_node ? "red" : "black",
+                color,
             };
             if (items[item_name]) {
                 for (var mat_key in items[item_name].mats) {
