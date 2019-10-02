@@ -20,8 +20,20 @@
             display: flex
         }
         
+        #materials {
+            margin-top: 50px;
+        }
+        
         #craft_tree {
+            margin-top: 50px;
             margin-left: 100px;
+        }
+        
+        #graph {
+            margin-top: 50px;
+            margin-left: 100px;
+            width: 60vw;
+            height: 80vh;
         }
         
         .button {
@@ -55,6 +67,10 @@
             content: ' x ';
         }
     </style>
+
+    <script src="./sigma/sigma.min.js"></script>
+    <script src="./sigma/plugins/sigma.layout.forceAtlas2.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="./items.js"></script>
     <script src='./calculator.js'></script>
@@ -76,7 +92,9 @@
         <div>
             <pre id="craft_tree"></pre>
         </div>
-    </div>
+        <div>
+            <pre id="graph"></pre>
+        </div>
     </div>
 </body>
 

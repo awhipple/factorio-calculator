@@ -1,6 +1,9 @@
 $(function() {
     var START_ON = "rocket part";
 
+    var graph;
+    var graph_force_timeout;
+
     var items = window.items;
     var hide_items = [];
     var item_select = $("#item_select");
@@ -8,18 +11,21 @@ $(function() {
     var material_detail_checkbox = $("#show_material_details");
     var materials_display = $("#materials");
     var craft_tree_display = $("#craft_tree");
+    var graph_display = $("#graph");
 
     function show_item_details() {
         var item = items[item_select.val()];
 
         materials_display.empty();
         craft_tree_display.empty();
+        graph_display.empty();
+
+        clearTimeout(graph_force_timeout);
 
         total_materials = calculate_total_materials(item);
 
         add_header(materials_display, "Total Materials");
         var per_sec = per_sec_input.val() || 1;
-
 
         add_sub_header(materials_display, "Raw");
         for (var mat_key in total_materials.raw) {
@@ -75,7 +81,10 @@ $(function() {
             show_item_details();
         });
 
-
+        add_header(graph_display, "Material Graph");
+        graph = makeGraph(item);
+        graph.startForceAtlas2();
+        graph_force_timeout = window.setTimeout(function() { graph.killForceAtlas2() }, 3000);
     }
 
     function show_item_materials(item, multiplier, spacers) {
@@ -172,6 +181,63 @@ $(function() {
         // Test Code
         item_select.val(START_ON);
         item_select.change();
+    }
+
+    function makeNodes(item_name, nodes, first_node = false) {
+        if (nodes[item_name] === undefined) {
+            nodes[item_name] = {
+                id: item_name,
+                label: item_name,
+                x: Math.random(),
+                y: Math.random(),
+                size: 1,
+                color: first_node ? "red" : "black",
+            };
+            if (items[item_name]) {
+                for (var mat_key in items[item_name].mats) {
+                    makeNodes(mat_key, nodes);
+                }
+            }
+        }
+        return Object.values(nodes);
+    }
+
+    function makeEdges(item_name, edges) {
+        if (items[item_name]) {
+            var item = items[item_name];
+            for (var mat_key in item.mats) {
+                item_mat = items[mat_key];
+                edge_name = mat_key + "->" + item.name;
+                if (edges[edge_name] === undefined) {
+                    edges[edge_name] = {
+                        id: edge_name,
+                        source: mat_key,
+                        target: item.name,
+                        type: "arrow",
+                        size: 1,
+                        color: "black",
+                    }
+                    makeEdges(mat_key, edges);
+                }
+            }
+        }
+        return Object.values(edges);
+    }
+
+    function makeGraph(item) {
+        return new sigma({
+            renderer: {
+                container: graph_display[0],
+                type: 'canvas'
+            },
+            settings: {
+                minArrowSize: 7,
+            },
+            graph: {
+                nodes: makeNodes(item.name, {}, true),
+                edges: makeEdges(item.name, {}),
+            },
+        });
     }
 
     function divide_item_time_and_mats_and_add_name() {
