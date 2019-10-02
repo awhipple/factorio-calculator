@@ -266,6 +266,21 @@ window.items = {
             "speed module": 1,
         }
     },
+    "rocket fuel": {
+        "time": 30,
+        "mats": {
+            "solid fuel": 10,
+            "light oil": 10,
+        }
+    },
+    "rocket part": {
+        "time": 3,
+        "mats": {
+            "rocket control unit": 10,
+            "low density structure": 10,
+            "rocket fuel": 10,
+        }
+    },
     "solar panel": {
         "time": 10,
         "mats": {

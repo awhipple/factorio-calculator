@@ -1,5 +1,5 @@
 $(function() {
-    var START_ON = "production science pack";
+    var START_ON = "rocket part";
 
     var items = window.items;
     var hide_items = [];
