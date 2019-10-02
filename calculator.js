@@ -181,7 +181,7 @@ $(function() {
 
         populate_select();
 
-        var selected_item = get_url_params()['item'] || localStorage.getItem('last_item');
+        var selected_item = get_url_params()['item'].replace(/%20/, ' ') || localStorage.getItem('last_item');
         if (selected_item) {
             item_select.val(selected_item)
             item_select.change();
