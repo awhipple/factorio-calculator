@@ -198,6 +198,9 @@ $(function() {
             },
             settings: {
                 minArrowSize: 7,
+                sideMargin: 1,
+                mouseWheelEnabled: false,
+                mouseEnabled: false,
             },
             graph: {
                 nodes: makeNodes(item.name, {}, true),
