@@ -1,6 +1,4 @@
 $(function() {
-    var START_ON = "rocket part";
-
     var graph;
     var graph_force_timeout;
 
@@ -8,7 +6,6 @@ $(function() {
     var hide_items = [];
     var item_select = $("#item_select");
     var per_sec_input = $("#items_per_sec");
-    var shuffle_graph_button = $("#shuffle_graph_button");
     var material_detail_checkbox = $("#show_material_details");
     var materials_display = $("#materials");
     var craft_tree_display = $("#craft_tree");
@@ -157,6 +154,7 @@ $(function() {
         divide_item_time_and_mats_and_add_name();
 
         item_select.change(function() {
+            localStorage.setItem('last_item', this.value);
             hide_items = [];
             show_item_details();
         });
@@ -183,11 +181,11 @@ $(function() {
 
         populate_select();
 
-        shuffle_graph_button.on('click', function() { render_graph(); })
-
-        // Test Code
-        item_select.val(START_ON);
-        item_select.change();
+        var last_item = localStorage.getItem('last_item');
+        if (last_item) {
+            item_select.val(last_item)
+            item_select.change();
+        }
     }
 
     function makeGraph(item) {
